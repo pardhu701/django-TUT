@@ -1,3 +1,5 @@
+{% include 'nav.html'%}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +12,7 @@
 </head>
 
 <body>
+    
     <!-- <nav class="navbar navbar-expand-sm bg-blue justify-content-cente">
     
   <div class="container-fluid bg-blue">
@@ -27,45 +30,33 @@
     </ul>
 
 </nav> -->
-    <div>
-        <div class="container-fluid ">
-            <div class="row-cols-1 mb3">
-                <form action="{% url 'praca' %}" method="POST" class="col-6">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-                            name="email">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword">
-                    </div>
-                    <div class="mb-3 form-check">
+    <div class="container-fluid ">
+        {% block content %}
+         {% endblock %}
+        <div class="container-fluid  ">
+            <div class=" container row-cols-1 mb 3 position-absolute top-50 start-50 translate-middle">
+                <form action="{% url 'praca' %}" method="POST" class="col-6 position-absolute top-50 start-50 translate-middle">
+                   <div class="row justify-content-cente text-center mb-4 ">
+                     <div class="col-12 fs-1 fw-bold align-self-center ">TEXTER.<sub class="fw-normal">com</sub></div>
+                   </div>
+                   
+                   <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                  </div>
+
+                    <div class="mb-3 mt-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
-
-        </div>
-        <div class="container mt-5">
-            <div class="row mr-3 mb-3">
-                <div class="col bg-primary ">1</div>
-                <div class="col bg-secondary">2</div>
-            </div>
-            <div class="row mr-3 mb-3">
-                <div class="col bg-primary">3</div>
-                <div class="col bg-secondary">4</div>
-            </div>
-            <div class="row mr-3 mb-3">
-                <div class="col bg-primary">5</div>
-                <div class="col bg-secondary">6</div>
-            </div>
-        </div>
-    </div>
+       </div>
 </body>
 
 </html>
