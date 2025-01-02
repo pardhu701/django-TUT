@@ -9,9 +9,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/bootstrap-utilities.rtl.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      #splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff; /* Black background */
+    color: #fff; /* White text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999; /* Ensure splash screen is on top */
+    opacity: 1;
+    transition: opacity 1s ease-out; /* Smooth fade out transition */
+}
+
+  #main-container{
+    display: none;
+  }
+    </style> 
+  
+  <style>
+   
+     
+
+    svg {
+      width: 500px;
+      height: 150px;
+    }
+
+    .letter {
+      fill: #375ba2;
+      font-family: 'Arial', sans-serif;
+      font-size: 48px;
+      font-weight: bold;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    .letter:nth-child(1) { animation-delay: 0.1s; }
+    .letter:nth-child(2) { animation-delay: 0.2s; }
+    .letter:nth-child(3) { animation-delay: 0.3s; }
+    .letter:nth-child(4) { animation-delay: 0.4s; }
+    .letter:nth-child(5) { animation-delay: 0.5s; }
+    .letter:nth-child(6) { animation-delay: 0.6s; }
+    .letter:nth-child(7) { animation-delay: 0.7s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  
 </head>
 
 <body>
+  <div id="splash-screen">
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="150" viewBox="0 0 500 150">
+      <defs>
+        <style>
+          .letter {
+            fill: #1446ab;
+            font-family: 'Arial', sans-serif;
+            font-size: 48px;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 1s forwards;
+          }
+          .letter:nth-child(1) { animation-delay: 0.1s; }
+          .letter:nth-child(2) { animation-delay: 0.2s; }
+          .letter:nth-child(3) { animation-delay: 0.3s; }
+          .letter:nth-child(4) { animation-delay: 0.4s; }
+          .letter:nth-child(5) { animation-delay: 0.5s; }
+          .letter:nth-child(6) { animation-delay: 0.6s; }
+          .letter:nth-child(7) { animation-delay: 0.7s; }
+  
+          @keyframes fadeInUp {
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        </style>
+      </defs>
+      <text x="50" y="100">
+        <tspan class="letter" x="50" y="100">T</tspan>
+        <tspan class="letter" x="100" y="100">e</tspan>
+        <tspan class="letter" x="150" y="100">x</tspan>
+        <tspan class="letter" x="200" y="100">t</tspan>
+        <tspan class="letter" x="250" y="100">e</tspan>
+        <tspan class="letter" x="300" y="100">r</tspan>
+      </text>
+      
+  
+    </svg>
+</div>
     
     <!-- <nav class="navbar navbar-expand-sm bg-blue justify-content-cente">
     
@@ -30,14 +129,15 @@
     </ul>
 
 </nav> -->
-    <div class="container-fluid ">
+    <div id=main="conatiner"class="container-fluid ">
         {% block content %}
          {% endblock %}
         <div class="container-fluid  ">
             <div class=" container row-cols-1 mb 3 position-absolute top-50 start-50 translate-middle">
                 <form action="{% url 'praca' %}" method="POST" class="col-6 position-absolute top-50 start-50 translate-middle">
                    <div class="row justify-content-cente text-center mb-4 ">
-                     <div class="col-12 fs-1 fw-bold align-self-center ">TEXTER.<sub class="fw-normal">com</sub></div>
+                     <div class="col-12 fs-1 fw-bold align-self-center "><span id="element" class="text-primary"></span>
+                      </div>
                    </div>
                    
                    <div class="form-floating mb-3">
@@ -57,6 +157,29 @@
                 </form>
             </div>
        </div>
+       <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+       <script>
+        var html='<sub class="fw-normal text-dark">com</sub>'
+        var typed = new Typed('#element', {
+          strings: ['Communicate->','TEXTER.'+html],
+          typeSpeed: 50,
+        });
+      </script>
+      <script>
+        window.onload = function() {
+    // Set a timer to remove the splash screen after 10 seconds
+    setTimeout(function() {
+        // Fade out the splash screen
+        document.getElementById('splash-screen').style.opacity = 0;
+
+        // After the animation (1 second), hide splash and show main content
+        setTimeout(function() {
+            document.getElementById('splash-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        }, 1000); // Delay matches the fade-out duration
+    }, 2000); // 10 seconds delay
+};
+      </script>
 </body>
 
 </html>
